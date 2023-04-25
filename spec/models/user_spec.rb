@@ -8,7 +8,7 @@ RSpec.describe User, type: :model do
 
       user = User.new({firstname: "Andy", lastname: "Bob", email: "andy123@gmail.com", password: "bluejays", password_confirmation: "bluejays"})
 
-      user.save!
+      user.save
 
       expect(user.id).to be_present
 
@@ -26,13 +26,13 @@ RSpec.describe User, type: :model do
     it 'validates :email is unique' do
       user1 = User.new({firstname: "Andy", lastname: "Bob", email: "andy123@gmail.com", password: "bluejays", password_confirmation: "bluejays"})
 
-      user1.save!
+      user1.save
 
       user2 = User.new({firstname: "Andy", lastname: "Bob", email: "andy123@gmail.com", password: "bluejays", password_confirmation: "bluejays"})
 
-      user2.save!
+      user2.save
 
-      expect(user2.id).to be_present
+      expect(user2.errors.full_messages).to include("Email has already been taken")
 
     end
 
